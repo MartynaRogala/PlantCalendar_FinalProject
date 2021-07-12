@@ -42,6 +42,7 @@ timedelta_adding_fertilizer = timedelta(days=adding_fertilizer)
 timedelta_adding_hormones = timedelta(days=adding_hormone)
 timedelta_photo_interval = timedelta(days=photo_interval)
 
+
 # Creating a tool for making list of dates with their action description:
 def day_counter(start_date, end_date, interval, description):
     """
@@ -54,6 +55,7 @@ def day_counter(start_date, end_date, interval, description):
         list.append(Action(start_date.strftime(dateFormat), description, dateFormat))
     return list
 
+
 # Creating list of dates with their description:
 actions = ["water the plants", "add fertilizer", "add hormones", "take photo"]
 list_watering = day_counter(start, end, timedelta_watering_interval, actions[0])
@@ -65,9 +67,8 @@ list_photo = day_counter(start, end, timedelta_photo_interval, actions[3])
 list_of_events = list_watering + list_fertilizer + list_hormone + list_photo
 
 # Inputing date by User to see what tasks needs to be done:
-# date = input("Enter date in DD.MM.YYYY format: ")
-# given_date = datetime.strptime(date, dateFormat)
-given_date = datetime.strptime("1.1.2021", dateFormat)
+date = input("Enter date in DD.MM.YYYY format: ")
+given_date = datetime.strptime(date, dateFormat)
 
 # Creating loop for getting type of task for particular day:
 action_existence = False
@@ -103,7 +104,7 @@ hormone_after_date = len(list_hormone_after_date)
 photo_after_date = len(list_photo_after_date)
 
 # Displaying information about experiment:
-print("\nExperiment", name_of_experiment,"information:\n")
+print("\nExperiment", name_of_experiment, "information:\n")
 print("Beginning of the experiment: ", "{:%Y-%m-%d}".format(start))
 print("Termination of rhe experiment: ", "{:%Y-%m-%d}".format(end))
 print("Experiment duration: ", experiment_duration.days, "days")
@@ -135,8 +136,7 @@ for i in list_of_events:
     if i.action_description == actions[3]:
         p.append("{:%Y-%m-%d}".format(i.date))
 
+# Creating DataFrame from dictionary:
 D = {actions[0]: w, actions[1]: f, actions[2]: h, actions[3]: p}
 D_df = pd.DataFrame({key: pd.Series(value) for key, value in D.items()})
 print("\nDates and actions: \n\n", D_df)
-
-
