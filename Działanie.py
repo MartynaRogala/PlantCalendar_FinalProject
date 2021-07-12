@@ -1,10 +1,12 @@
 # E1
 import datetime
+import numpy as np
 from datetime import timedelta
 import pandas as pd
+from ClassAction import Action
 
 start = datetime.date(2021, 1, 1)
-end = datetime.date(2021, 2, 1)
+end = datetime.date(2021, 1, 16)
 
 watering = 4
 adding_fertilizer = 8
@@ -32,16 +34,32 @@ list_fertilizer = day_counter(start, end, timedelta_adding_fertilizer)
 list_hormone = day_counter(start, end, timedelta_adding_hormones)
 list_photo = day_counter(start, end, timedelta_photo_interval)
 
+list_of_events = list_watering + list_fertilizer + list_hormone + list_photo
+print(list_of_events)
+len = len(list_of_events)
+print(len)
+
+# list_of_events.sort(key=lambda x: x.date)
+# print(list_of_events)
+
+
 print("Normal watering: \n", list_watering)
 print("Fertilizer watering:\n", list_fertilizer)
 print("Hormone watering:\n", list_hormone)
 print("Photo of the plants:\n", list_photo)
 
+
 # Constructing DataFrame from a dictionary.
 D = {"watering": list_watering, "fertilizer": list_fertilizer, "hormone": list_hormone, "photo": list_photo}
-print("Dictionary:\n",D)
-D_df = pd.DataFrame({ key:pd.Series(value) for key, value in D.items() })
-print("DataFrame: \n",D_df)
+print("Dictionary:\n", D)
+D_df = pd.DataFrame({key: pd.Series(value) for key, value in D.items()})
+print("DataFrame: \n", D_df)
+
+for i in D:
+
+# for i in D_df.index:
+#     print(D_df.get(i))
+
 
 # Constructing DataFrame from a list of dictionaries.
 # dictionary_watering = dict.fromkeys(list_watering, "watering")
@@ -64,4 +82,3 @@ print("DataFrame: \n",D_df)
 # print(zip_dictionary)
 # print(len(zip_dictionary.keys()))
 # print(sorted(zip_dictionary))
-
