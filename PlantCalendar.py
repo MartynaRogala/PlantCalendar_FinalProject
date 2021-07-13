@@ -25,6 +25,7 @@ adding_fertilizer = 0
 adding_hormone = 0
 photo_interval = 0
 
+# Inputing name of file with data requested by the User:
 csv_datafile = input(str("Enter name of file with data in format: XXX.csv: "))
 
 # Uploading data from csv file:
@@ -83,6 +84,7 @@ list_of_events = list_watering + list_fertilizer + list_hormone + list_photo
 date = input("Enter date in DD.MM.YYYY format: ")
 given_date = datetime.strptime(date, dateFormat)
 
+# Creating new text file with name of experiment and date requested by the User:
 report = open("PlantCalendar_result_"+name_of_experiment+"_"+"{:%Y-%m-%d}".format(given_date)+".txt", "w")
 
 # Creating loop for getting type of task for particular day:
