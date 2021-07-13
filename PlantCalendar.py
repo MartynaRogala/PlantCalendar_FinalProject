@@ -2,6 +2,7 @@ import csv
 from datetime import timedelta
 from datetime import datetime
 import pandas as pd
+import os
 
 
 # Class for object called "Action":
@@ -24,8 +25,10 @@ adding_fertilizer = 0
 adding_hormone = 0
 photo_interval = 0
 
+csv_datafile = input(str("Enter name of file with data in format: XXX.csv: "))
+
 # Uploading data from csv file:
-with open('plant.csv') as csv_file:
+with open(csv_datafile) as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=',')
     line_count = 0
     for row in csv_reader:
@@ -80,18 +83,20 @@ list_of_events = list_watering + list_fertilizer + list_hormone + list_photo
 date = input("Enter date in DD.MM.YYYY format: ")
 given_date = datetime.strptime(date, dateFormat)
 
+report = open("PlantCalendar_result_"+name_of_experiment+"_"+"{:%Y-%m-%d}".format(given_date)+".txt", "w")
+
 # Creating loop for getting type of task for particular day:
 action_existence = False
-print("*" * 70, "\n\nTask to do in", "{:%Y-%m-%d}".format(given_date), ":")
+report.write("*" * 70 + "\n\nTask to do in " + "{:%Y-%m-%d}".format(given_date) + ":\n")
 for i in list_of_events:
     if given_date == i.date:
         action_existence = True
-        print(i.action_description)
-print("\n")
+        report.write(i.action_description +"\n")
+report.write("\n")
 if not action_existence:
-    print("There are no tasks scheduled for this day \n")
+    report.write("There are no tasks scheduled for this day \n\n")
 
-print("*" * 70)
+report.write("*" * 70)
 # Additional operations on data:
 experiment_duration = end - start
 
@@ -116,21 +121,27 @@ hormone_after_date = len(list_hormone_after_date)
 photo_after_date = len(list_photo_after_date)
 
 # Displaying information about experiment:
-print("\nExperiment", name_of_experiment, "information:\n")
-print("Beginning of the experiment: ", "{:%Y-%m-%d}".format(start))
-print("Termination of rhe experiment: ", "{:%Y-%m-%d}".format(end))
-print("Experiment duration: ", experiment_duration.days, "days")
-print("\nTask day intervals:\n - Watering:", timedelta_watering_interval.days, "\n - Adding fertilizer:",
-      timedelta_adding_fertilizer.days, "\n - Adding hormone:", timedelta_adding_hormones.days, "\n - Taking photos:",
-      timedelta_photo_interval.days)
-print("\nAmount of particular task during experiment:\n - Watering:", len(list_watering), "\n - Adding fertilizer:",
-      len(list_fertilizer), "\n - Adding hormone:", len(list_hormone), "\n - Taking photos:", len(list_photo))
-print("\nCompleted tasks until", "{:%Y-%m-%d}".format(given_date), ":\n - Watering:", watering_before_date,
-      "\n - Adding fertilizer:",
-      fertilizer_before_date, "\n - Adding hormone:", hormone_before_date, "\n - Taking photos:", photo_before_date)
-print("\nTasks to be performed after", "{:%Y-%m-%d}".format(given_date), ":\n - Watering:", watering_after_date,
-      "\n - Adding fertilizer:",
-      fertilizer_after_date, "\n - Adding hormone:", hormone_after_date, "\n - Taking photos:", photo_after_date,"\n")
+report.write("\nExperiment " + name_of_experiment + " information:\n")
+report.write("Beginning of the experiment: " + "{:%Y-%m-%d}".format(start))
+report.write("\nTermination of the experiment: " + "{:%Y-%m-%d}".format(end))
+report.write("\nExperiment duration: " + str(experiment_duration.days) + " days")
+report.write("\n\nTask day intervals:\n - Watering: " + str(timedelta_watering_interval.days) + "\n - Adding fertilizer: " +
+             str(timedelta_adding_fertilizer.days) + "\n - Adding hormone: " + str(
+    timedelta_adding_hormones.days) + "\n - Taking photos: " +
+             str(timedelta_photo_interval.days))
+report.write("\n\nAmount of particular task during experiment:\n - Watering: " + str(len(list_watering)) +
+             "\n - Adding fertilizer: " +
+             str(len(list_fertilizer)) + "\n - Adding hormone: " + str(len(list_hormone)) + "\n - Taking photos: " + str(
+    len(list_photo)))
+report.write("\n\nCompleted tasks until " + "{:%Y-%m-%d}".format(given_date) + ":\n - Watering: " + str(watering_before_date) +
+             "\n - Adding fertilizer: " +
+             str(fertilizer_before_date) + "\n - Adding hormone: " + str(hormone_before_date) + "\n - Taking photos: " +
+             str(photo_before_date))
+report.write(
+    "\n\nTasks to be performed after " + "{:%Y-%m-%d}".format(given_date) + ":\n - Watering: " + str(watering_after_date) +
+    "\n - Adding fertilizer: " +
+    str(fertilizer_after_date) + "\n - Adding hormone: " + str(hormone_after_date) + "\n - Taking photos: " + str(photo_after_date) +
+    "\n")
 
 # Creating variables for making DataFrame from data:
 w = []
@@ -151,4 +162,6 @@ for i in list_of_events:
 # Creating DataFrame from dictionary:
 D = {actions[0]: w, actions[1]: f, actions[2]: h, actions[3]: p}
 D_df = pd.DataFrame({key: pd.Series(value) for key, value in D.items()})
-print("*" * 70,"\n\nDates and actions: \n\n", D_df)
+report.write("*" * 70 + "\n\nDates and actions: \n\n" + str(D_df))
+
+report.close()
