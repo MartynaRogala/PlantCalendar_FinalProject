@@ -1,8 +1,18 @@
 import csv
 from datetime import timedelta
-from ClassAction import Action
 from datetime import datetime
 import pandas as pd
+
+
+# Class for object called "Action":
+class Action:
+    def __init__(self, date, action_description, date_format):
+        self.date = datetime.strptime(date, date_format)
+        self.action_description = action_description
+
+    def __repr__(self):
+        return "{},{}".format(self.date, self.action_description)
+
 
 # Starting data :
 dateFormat = "%d.%m.%Y"
@@ -72,14 +82,16 @@ given_date = datetime.strptime(date, dateFormat)
 
 # Creating loop for getting type of task for particular day:
 action_existence = False
-print("Task to do in", "{:%Y-%m-%d}".format(given_date), ":")
+print("*" * 70, "\n\nTask to do in", "{:%Y-%m-%d}".format(given_date), ":")
 for i in list_of_events:
     if given_date == i.date:
         action_existence = True
         print(i.action_description)
+print("\n")
 if not action_existence:
-    print("There are no tasks scheduled for this day")
+    print("There are no tasks scheduled for this day \n")
 
+print("*" * 70)
 # Additional operations on data:
 experiment_duration = end - start
 
@@ -118,7 +130,7 @@ print("\nCompleted tasks until", "{:%Y-%m-%d}".format(given_date), ":\n - Wateri
       fertilizer_before_date, "\n - Adding hormone:", hormone_before_date, "\n - Taking photos:", photo_before_date)
 print("\nTasks to be performed after", "{:%Y-%m-%d}".format(given_date), ":\n - Watering:", watering_after_date,
       "\n - Adding fertilizer:",
-      fertilizer_after_date, "\n - Adding hormone:", hormone_after_date, "\n - Taking photos:", photo_after_date)
+      fertilizer_after_date, "\n - Adding hormone:", hormone_after_date, "\n - Taking photos:", photo_after_date,"\n")
 
 # Creating variables for making DataFrame from data:
 w = []
@@ -139,4 +151,4 @@ for i in list_of_events:
 # Creating DataFrame from dictionary:
 D = {actions[0]: w, actions[1]: f, actions[2]: h, actions[3]: p}
 D_df = pd.DataFrame({key: pd.Series(value) for key, value in D.items()})
-print("\nDates and actions: \n\n", D_df)
+print("*" * 70,"\n\nDates and actions: \n\n", D_df)
