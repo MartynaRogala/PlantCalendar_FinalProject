@@ -27,7 +27,7 @@ photo_interval = 0
 
 # Creating info text for the User
 print(
-    "\nThis programme provides a list of tasks which are need to be done in specific day according to your experiment plans.\n")
+    "\nThis program provides a list of tasks which are need to be done in specific day according to your experiment plans.\n")
 
 # Inputing name of file with data requested by the User:
 csv_datafile = input(str("Enter name of file with previously prepared data about your experiment in format: XXX.csv: "))
