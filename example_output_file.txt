@@ -1,0 +1,56 @@
+**********************************************************************
+
+Task to do in 2021-01-12:
+
+There are no tasks scheduled for this day 
+
+**********************************************************************
+Experiment Plant2 information:
+Beginning of the experiment: 2021-01-01
+Termination of the experiment: 2021-02-01
+Experiment duration: 31 days
+
+Task day intervals:
+ - Watering: 2
+ - Adding fertilizer: 6
+ - Adding hormone: 12
+ - Taking photos: 3
+
+Amount of particular task during experiment:
+ - Watering: 16
+ - Adding fertilizer: 6
+ - Adding hormone: 3
+ - Taking photos: 11
+
+Completed tasks until 2021-01-12:
+ - Watering: 6
+ - Adding fertilizer: 2
+ - Adding hormone: 1
+ - Taking photos: 4
+
+Tasks to be performed after 2021-01-12:
+ - Watering: 11
+ - Adding fertilizer: 4
+ - Adding hormone: 2
+ - Taking photos: 7
+**********************************************************************
+
+Dates and actions: 
+
+   water the plants add fertilizer add hormones  take photo
+0        2021-01-03     2021-01-07   2021-01-13  2021-01-04
+1        2021-01-05     2021-01-13   2021-01-25  2021-01-07
+2        2021-01-07     2021-01-19   2021-02-06  2021-01-10
+3        2021-01-09     2021-01-25          NaN  2021-01-13
+4        2021-01-11     2021-01-31          NaN  2021-01-16
+5        2021-01-13     2021-02-06          NaN  2021-01-19
+6        2021-01-15            NaN          NaN  2021-01-22
+7        2021-01-17            NaN          NaN  2021-01-25
+8        2021-01-19            NaN          NaN  2021-01-28
+9        2021-01-21            NaN          NaN  2021-01-31
+10       2021-01-23            NaN          NaN  2021-02-03
+11       2021-01-25            NaN          NaN         NaN
+12       2021-01-27            NaN          NaN         NaN
+13       2021-01-29            NaN          NaN         NaN
+14       2021-01-31            NaN          NaN         NaN
+15       2021-02-02            NaN          NaN         NaN
